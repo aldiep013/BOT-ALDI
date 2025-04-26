@@ -1,5 +1,5 @@
 from telethon import TelegramClient, events
-from database import create_table, insert_nft, get_all_nfts
+from bot.database import create_table, insert_nft, get_all_nfts
 
 # Konfigurasi API Telethon
 api_id = 24576633         # Ganti dengan API ID kamu
