@@ -1,0 +1,42 @@
+import sqlite3
+
+def connect_db():
+    conn = sqlite3.connect("nft.db")
+    return conn
+
+def create_table():
+    conn = connect_db()
+    c = conn.cursor()
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS nfts (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT,
+            model TEXT,
+            latar TEXT,
+            simbol TEXT,
+            owner TEXT,
+            price TEXT,
+            image_url TEXT,
+            nft_link TEXT
+        )
+    ''')
+    conn.commit()
+    conn.close()
+
+def insert_nft(name, model, latar, simbol, owner, price, image_url, nft_link):
+    conn = connect_db()
+    c = conn.cursor()
+    c.execute('''
+        INSERT INTO nfts (name, model, latar, simbol, owner, price, image_url, nft_link)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+    ''', (name, model, latar, simbol, owner, price, image_url, nft_link))
+    conn.commit()
+    conn.close()
+
+def get_all_nfts():
+    conn = connect_db()
+    c = conn.cursor()
+    c.execute('SELECT * FROM nfts')
+    rows = c.fetchall()
+    conn.close()
+    return rows
