@@ -46,6 +46,13 @@ async def handler(event):
 
         await event.reply("✅ NFT berhasil disimpan!")
 
+@client.on(events.NewMessage(pattern='/upload'))
+async def handler(event):
+    print("Pesan /upload diterima")
+    if event.is_reply:
+        reply = await event.get_reply_message()
+        print("Pesan dibalas:", reply.text)
+
 @client.on(events.NewMessage(pattern='/generate'))
 async def generate(event):
     nfts = get_all_nfts()
