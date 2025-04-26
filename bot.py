@@ -3,9 +3,9 @@ import sqlite3
 import re
 
 # Inisialisasi bot dengan Telethon
-api_id = 'API_ID'
-api_hash = 'API_HASH'
-bot_token = 'BOT_TOKEN'
+api_id = '24576633'
+api_hash = '29931cf620fad738ee7f69442c98e2ee'
+bot_token = '7839023375:AAFeNnN--zEUYo7MygKGe_gHYOln-zhHQuo'
 
 client = TelegramClient('referral_bot', api_id, api_hash).start(bot_token=bot_token)
 
