@@ -48,5 +48,19 @@ async def start_handler(event):
     else:
         await event.respond("Selamat datang! Anda dapat merujuk teman dengan link berikut.")
         
+# Handler untuk perintah /cek
+@client.on(events.NewMessage(pattern='/cek'))
+async def cek_handler(event):
+    user_id = event.sender_id  # Mendapatkan user_id pengirim perintah
+    
+    # Mendapatkan jumlah referral (poin) pengguna
+    points = get_points(user_id)
+    
+    # Menampilkan jumlah referral (poin)
+    if points > 0:
+        await event.respond(f"Anda memiliki {points} poin referral.")
+    else:
+        await event.respond("Anda belum memiliki poin referral.")
+        
 # Jalankan bot
 client.run_until_disconnected()
