@@ -2,7 +2,7 @@ import sqlite3
 
 # Fungsi untuk membuat database dan tabel jika belum ada
 def create_db():
-    conn = sqlite3.connect("referral_points.db")
+    conn = sqlite3.connect("/mnt/data/referral_points.db")
     cursor = conn.cursor()
     
     # Membuat tabel untuk menyimpan data referral
