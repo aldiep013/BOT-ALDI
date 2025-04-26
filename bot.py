@@ -11,7 +11,7 @@ client = TelegramClient('referral_bot', api_id, api_hash).start(bot_token=bot_to
 
 # Fungsi untuk mendapatkan poin pengguna berdasarkan user_id
 def get_points(user_id):
-    conn = sqlite3.connect("referral_points.db")
+    conn = sqlite3.connect("/mnt/database/referral_points.db")
     cursor = conn.cursor()
     cursor.execute("SELECT points FROM referrals WHERE user_id = ?", (user_id,))
     result = cursor.fetchone()
@@ -20,7 +20,7 @@ def get_points(user_id):
 
 # Fungsi untuk menambahkan poin
 def add_points(user_id, points=1):
-    conn = sqlite3.connect("referral_points.db")
+    conn = sqlite3.connect("/mnt/database/referral_points.db")
     cursor = conn.cursor()
     cursor.execute("SELECT points FROM referrals WHERE user_id = ?", (user_id,))
     result = cursor.fetchone()
