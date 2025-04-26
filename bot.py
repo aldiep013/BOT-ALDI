@@ -2,9 +2,9 @@ from telethon import TelegramClient, events
 from database import create_table, insert_nft, get_all_nfts
 
 # Konfigurasi API Telethon
-api_id = 12345678         # Ganti dengan API ID kamu
-api_hash = 'abcdef1234567890abcdef1234567890' # Ganti dengan API Hash kamu
-bot_token = 'TOKEN_BOT'    # Ganti dengan token botmu
+api_id = 24576633         # Ganti dengan API ID kamu
+api_hash = '29931cf620fad738ee7f69442c98e2ee' # Ganti dengan API Hash kamu
+bot_token = '7839023375:AAFeNnN--zEUYo7MygKGe_gHYOln-zhHQuo'    # Ganti dengan token botmu
 
 client = TelegramClient('nftbot', api_id, api_hash).start(bot_token=bot_token)
 
