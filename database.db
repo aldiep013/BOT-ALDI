@@ -1,14 +1,14 @@
+# bot/database.py
 import sqlite3
 
-def connect_db():
-    conn = sqlite3.connect("nft.db")
-    return conn
+# Buat / koneksi ke database
+conn = sqlite3.connect('sqlite3.db')
+cursor = conn.cursor()
 
+# Membuat table jika belum ada
 def create_table():
-    conn = connect_db()
-    c = conn.cursor()
-    c.execute('''
-        CREATE TABLE IF NOT EXISTS nfts (
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS nft (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             name TEXT,
             model TEXT,
@@ -21,22 +21,16 @@ def create_table():
         )
     ''')
     conn.commit()
-    conn.close()
 
+# Menambahkan data NFT
 def insert_nft(name, model, latar, simbol, owner, price, image_url, nft_link):
-    conn = connect_db()
-    c = conn.cursor()
-    c.execute('''
-        INSERT INTO nfts (name, model, latar, simbol, owner, price, image_url, nft_link)
+    cursor.execute('''
+        INSERT INTO nft (name, model, latar, simbol, owner, price, image_url, nft_link)
         VALUES (?, ?, ?, ?, ?, ?, ?, ?)
     ''', (name, model, latar, simbol, owner, price, image_url, nft_link))
     conn.commit()
-    conn.close()
 
+# Mengambil semua data NFT
 def get_all_nfts():
-    conn = connect_db()
-    c = conn.cursor()
-    c.execute('SELECT * FROM nfts')
-    rows = c.fetchall()
-    conn.close()
-    return rows
+    cursor.execute('SELECT * FROM nft')
+    return cursor.fetchall()
