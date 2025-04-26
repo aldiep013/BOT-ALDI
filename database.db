@@ -1,36 +1,16 @@
-# bot/database.py
 import sqlite3
 
-# Buat / koneksi ke database
-conn = sqlite3.connect('sqlite3.db')
-cursor = conn.cursor()
-
-# Membuat table jika belum ada
-def create_table():
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS nft (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT,
-            model TEXT,
-            latar TEXT,
-            simbol TEXT,
-            owner TEXT,
-            price TEXT,
-            image_url TEXT,
-            nft_link TEXT
-        )
-    ''')
+# Fungsi untuk membuat database dan tabel jika belum ada
+def create_db():
+    conn = sqlite3.connect("referral_points.db")
+    cursor = conn.cursor()
+    
+    # Membuat tabel untuk menyimpan data referral
+    cursor.execute('''CREATE TABLE IF NOT EXISTS referrals (
+                        user_id INTEGER PRIMARY KEY,
+                        points INTEGER)''')
+    
     conn.commit()
+    conn.close()
 
-# Menambahkan data NFT
-def insert_nft(name, model, latar, simbol, owner, price, image_url, nft_link):
-    cursor.execute('''
-        INSERT INTO nft (name, model, latar, simbol, owner, price, image_url, nft_link)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    ''', (name, model, latar, simbol, owner, price, image_url, nft_link))
-    conn.commit()
-
-# Mengambil semua data NFT
-def get_all_nfts():
-    cursor.execute('SELECT * FROM nft')
-    return cursor.fetchall()
+create_db()
