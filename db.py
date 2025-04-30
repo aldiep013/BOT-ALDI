@@ -1,0 +1,29 @@
+import sqlite3
+
+# Buat atau koneksi ke database SQLite
+conn = sqlite3.connect("data/users.db", check_same_thread=False)
+cursor = conn.cursor()
+
+# Buat tabel jika belum ada
+cursor.execute("""
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY,
+    username TEXT,
+    first_name TEXT,
+    last_name TEXT
+)
+""")
+conn.commit()
+
+def add_user(user):
+    cursor.execute("SELECT id FROM users WHERE id = ?", (user.id,))
+    if cursor.fetchone() is None:
+        cursor.execute(
+            "INSERT INTO users (id, username, first_name, last_name) VALUES (?, ?, ?, ?)",
+            (user.id, user.username, user.first_name, user.last_name)
+        )
+        conn.commit()
+
+def count_users():
+    cursor.execute("SELECT COUNT(*) FROM users")
+    return cursor.fetchone()[0]
