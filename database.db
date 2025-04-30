@@ -23,3 +23,7 @@ def add_user(user):
             (user.id, user.username, user.first_name, user.last_name)
         )
         conn.commit()
+
+def count_users():
+    cursor.execute("SELECT COUNT(*) FROM users")
+    return cursor.fetchone()[0]
